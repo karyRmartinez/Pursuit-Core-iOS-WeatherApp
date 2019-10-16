@@ -9,13 +9,27 @@
 import UIKit
 
 class FirstViewController: UIViewController {
-
-     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-
-      
-    }
-
+ 
+ lazy var tableView: UICollectionView = {
+        let weatherView = UICollectionView()
+       
+    
+    weatherView.register(weatherCollectionViewCell.self, forCellWithReuseIdentifier: "weatherCell")
+        return weatherView
+    }()
+    
+    
+    
+//    override init(frame: CGRect) {
+//        super.init(frame: UIScreen.main.bounds) // takes up all the space in the simulator
+//    }
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//    }
+//    private func commonInit() {
+//        ViewSetup()
+//    }
+//    private func ViewSetup() {
+//        addSubview(tableView)
+//    }
 }
