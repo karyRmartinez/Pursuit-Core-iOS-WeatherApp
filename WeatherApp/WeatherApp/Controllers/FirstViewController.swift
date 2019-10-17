@@ -9,46 +9,61 @@
 import UIKit
 
 class FirstViewController: UIViewController {
-    
-    
-    var WeatherView = collectionViewView()
-    
-    var currentWeather = [Weather]() {
+        
+    lazy var collectionView: UICollectionView = {
+        let weatherView = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: UICollectionViewFlowLayout())
+        
+        weatherView.register(weatherCollectionViewCell.self, forCellWithReuseIdentifier: "weatherCell")
+        weatherView.dataSource = self
+        weatherView.backgroundColor = .red
+        return weatherView
+      
+    }()
+        
+    var weatherForecast = [DailyDatum]() {
         didSet {
-            WeatherView.tableView.reloadData()
+           collectionView.reloadData()
         }
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         addSubView()
-        setDelegations()
-        addSubView()
+        loadData()
+        setUpCollectionViewConstraints()
+        
         // Do any additional setup after loading the view.
     }
-    
-    
-    func setDelegations() {
-        WeatherView.tableView.delegate = self
-       WeatherView.tableView.dataSource = self
+ 
+    private func setUpCollectionViewConstraints(){
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+        collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+       collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+       collectionView.widthAnchor.constraint(equalTo: view.widthAnchor),
+       collectionView.heightAnchor.constraint(equalTo: view.heightAnchor)
+        ])
     }
     
-
-    func getUsData() {
-        WeatherAPIManager.shared.getWeather { (result) in
-            switch result {
-            case .failure(let error):
-                print(error)
-            case .success(let data):
-                self.currentWeather = [data]
-
+    private func loadData() {
+        WeatherAPIClient.manager.getWeather{ (result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let WeatherFromOnline):
+                    dump(WeatherFromOnline)
+                    self.weatherForecast = WeatherFromOnline
+                    
+                case .failure(let error):
+                    print(error)
+                }
             }
         }
     }
-    
     func addSubView() {
-        self.view.addSubview(WeatherView.tableView)
+        self.view.addSubview(collectionView)
+
     }
     
 }
@@ -59,16 +74,25 @@ extension FirstViewController: UICollectionViewDelegate {
 
 extension FirstViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return currentWeather.count
+        return weatherForecast.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherCell", for: indexPath) as? weatherCollectionViewCell else { return UICollectionViewCell() }
-        var theweather = currentWeather[indexPath.row]
-        cell.name.text = currentWeather.description
+        let theweather = weatherForecast[indexPath.row]
+        cell.name.text = "\(theweather.icon)"
         return cell
     }
     
 }
 
 
+extension FirstViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: 120 , height: 120)
+    }
+}

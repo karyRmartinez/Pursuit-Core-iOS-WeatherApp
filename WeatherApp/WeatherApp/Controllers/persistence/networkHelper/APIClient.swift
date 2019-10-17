@@ -11,7 +11,7 @@ import Foundation
 struct WeatherAPIClient {
     static let manager = WeatherAPIClient()
     
-    func getWeather(completionHandler: @escaping (Result<Weather, AppError>) -> ()) {
+    func getWeather(completionHandler: @escaping (Result<[DailyDatum], AppError>) -> ()) {
         NetworkHelper.manager.performDataTask(withUrl: WeatherUrl, andMethod: .get) { (result) in
             switch result {
             case .failure(let error) :
@@ -19,7 +19,7 @@ struct WeatherAPIClient {
             case .success(let data):
                 do {
                     let WeatherInfo = try JSONDecoder().decode(Weather.self, from: data)
-                    completionHandler(.success(WeatherInfo))
+                    completionHandler(.success(WeatherInfo.daily.data))
                 } catch {
                     completionHandler(.failure(.couldNotParseJSON(rawError: error)))
                     
