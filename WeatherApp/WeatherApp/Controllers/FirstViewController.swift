@@ -9,27 +9,66 @@
 import UIKit
 
 class FirstViewController: UIViewController {
- 
- lazy var tableView: UICollectionView = {
-        let weatherView = UICollectionView()
-       
-    
-    weatherView.register(weatherCollectionViewCell.self, forCellWithReuseIdentifier: "weatherCell")
-        return weatherView
-    }()
     
     
+    var WeatherView = collectionViewView()
     
-//    override init(frame: CGRect) {
-//        super.init(frame: UIScreen.main.bounds) // takes up all the space in the simulator
-//    }
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//    }
-//    private func commonInit() {
-//        ViewSetup()
-//    }
-//    private func ViewSetup() {
-//        addSubview(tableView)
-//    }
+    var currentWeather = [Weather]() {
+        didSet {
+            WeatherView.tableView.reloadData()
+        }
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addSubView()
+        setDelegations()
+        addSubView()
+        // Do any additional setup after loading the view.
+    }
+    
+    
+    func setDelegations() {
+        WeatherView.tableView.delegate = self
+       WeatherView.tableView.dataSource = self
+    }
+    
+
+    func getUsData() {
+        WeatherAPIManager.shared.getWeather { (result) in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let data):
+                self.currentWeather = [data]
+
+            }
+        }
+    }
+    
+    func addSubView() {
+        self.view.addSubview(WeatherView.tableView)
+    }
+    
 }
+
+extension FirstViewController: UICollectionViewDelegate {
+    
+}
+
+extension FirstViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return currentWeather.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherCell", for: indexPath) as? weatherCollectionViewCell else { return UICollectionViewCell() }
+        var theweather = currentWeather[indexPath.row]
+        cell.name.text = currentWeather.description
+        return cell
+    }
+    
+}
+
+
