@@ -13,33 +13,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
-           guard let windowScene = (scene as? UIWindowScene) else { return }
-        
-        
-        let tabBarController = UITabBarController()
-        let firstVC = FirstViewController()
-   
-        let firstTabNavigationController = UINavigationController.init(rootViewController: firstVC)
-         firstTabNavigationController.tabBarItem.title = "Search"
-        
-       
-        
-        tabBarController.viewControllers = [firstTabNavigationController]
-        
-        
      
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.windowScene = windowScene
-        window?.rootViewController = tabBarController
-        window?.makeKeyAndVisible()
-        
+      guard let windowScene = (scene as? UIWindowScene) else { return }
+      let firstVC = FirstViewController()
+      let PhotosVC = PhotosViewController()
       
-        let item1 = UITabBarItem(tabBarSystemItem: .search, tag: 2)
-       
-        firstTabNavigationController.tabBarItem = item1
-        
-    }
+      let navVC = UINavigationController(rootViewController: firstVC)
+      let tabController = UITabBarController()
+        let bestTab = UITabBarItem(tabBarSystemItem: .search, tag: 2)
+     
+          //UITabBarItem(tabBarSystemItem: .more, tag: 2)
+        let favTab = UITabBarItem(tabBarSystemItem: .favorites, tag: 2)
+          //UITabBarItem(tabBarSystemItem: .bookmarks, tag: 1)
+      navVC.tabBarItem = bestTab
+      PhotosVC.tabBarItem = favTab
+      
+      tabController.viewControllers = [navVC,PhotosVC,]
+      window = UIWindow(frame: UIScreen.main.bounds)
+      window?.windowScene = windowScene
+      window?.rootViewController = tabController
+      window?.makeKeyAndVisible()
+  }
     
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
