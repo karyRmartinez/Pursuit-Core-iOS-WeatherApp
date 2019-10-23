@@ -8,14 +8,21 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class FirstViewController: UIViewController, UITextFieldDelegate {
         
     lazy var collectionView: UICollectionView = {
-        let weatherView = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: UICollectionViewFlowLayout())
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
         
+        let weatherView = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: layout)
+       
         weatherView.register(weatherCollectionViewCell.self, forCellWithReuseIdentifier: "weatherCell")
         weatherView.dataSource = self
+        weatherView.delegate = self
         weatherView.backgroundColor = .red
+       
+        
+        
         return weatherView
       
     }()
@@ -29,21 +36,41 @@ class FirstViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        view.backgroundColor = .blue
         addSubView()
         loadData()
         setUpCollectionViewConstraints()
-        
-        // Do any additional setup after loading the view.
+        setTextFieldConstraints()
+       
     }
- 
+    lazy var zipCodeTextField: UITextField = {
+        let textView = UITextField()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.placeholder = "Enter Zipcode..."
+        textView.borderStyle = .line
+        textView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        textView.delegate = self
+        return textView
+    }()
+    
+   private func setTextFieldConstraints() {
+       NSLayoutConstraint.activate([
+           zipCodeTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+           zipCodeTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
+           zipCodeTextField.widthAnchor.constraint(equalToConstant: 130),
+           zipCodeTextField.heightAnchor.constraint(equalToConstant: 35)
+       ])
+   }
     private func setUpCollectionViewConstraints(){
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-        collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-       collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-       collectionView.widthAnchor.constraint(equalTo: view.widthAnchor),
-       collectionView.heightAnchor.constraint(equalTo: view.heightAnchor)
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+//                    collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+//                   collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//                   collectionView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            collectionView.heightAnchor.constraint(equalToConstant: view.frame.width/2)
         ])
     }
     
@@ -63,10 +90,11 @@ class FirstViewController: UIViewController {
     }
     func addSubView() {
         self.view.addSubview(collectionView)
-
+        self.view.addSubview(zipCodeTextField)
     }
     
 }
+
 
 extension FirstViewController: UICollectionViewDelegate {
     
@@ -81,6 +109,8 @@ extension FirstViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherCell", for: indexPath) as? weatherCollectionViewCell else { return UICollectionViewCell() }
         let theweather = weatherForecast[indexPath.row]
         cell.name.text = "\(theweather.icon)"
+        
+   
         return cell
     }
     
@@ -89,10 +119,8 @@ extension FirstViewController: UICollectionViewDataSource {
 
 extension FirstViewController: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: 120 , height: 120)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 300, height: 300)
     }
-}
+
+    }

@@ -22,6 +22,8 @@
 		6B00CFDF23579E5F00C14F49 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B00CFDE23579E5F00C14F49 /* Secrets.swift */; };
 		6B00CFE12357A6C700C14F49 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B00CFE02357A6C700C14F49 /* APIClient.swift */; };
 		6B00CFE92357BF1400C14F49 /* weatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B00CFE82357BF1400C14F49 /* weatherCollectionViewCell.swift */; };
+		6B00D01F235932C100C14F49 /* imageHelpere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B00D01E235932C100C14F49 /* imageHelpere.swift */; };
+		6B00D055235DEC8E00C14F49 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B00D054235DEC8E00C14F49 /* PhotosViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		6B00CFDE23579E5F00C14F49 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		6B00CFE02357A6C700C14F49 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		6B00CFE82357BF1400C14F49 /* weatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weatherCollectionViewCell.swift; sourceTree = "<group>"; };
+		6B00D01E235932C100C14F49 /* imageHelpere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageHelpere.swift; sourceTree = "<group>"; };
+		6B00D054235DEC8E00C14F49 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +94,9 @@
 			isa = PBXGroup;
 			children = (
 				6B00CFDA23577C5D00C14F49 /* FirstViewController.swift */,
+				6B00D01E235932C100C14F49 /* imageHelpere.swift */,
 				6B00CFE82357BF1400C14F49 /* weatherCollectionViewCell.swift */,
+				6B00D054235DEC8E00C14F49 /* PhotosViewController.swift */,
 				6B00CFCB2357721D00C14F49 /* persistence */,
 			);
 			path = Controllers;
@@ -196,6 +202,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B00D01F235932C100C14F49 /* imageHelpere.swift in Sources */,
+				6B00D055235DEC8E00C14F49 /* PhotosViewController.swift in Sources */,
 				6B00CFD2235774FE00C14F49 /* NetworkHelper.swift in Sources */,
 				6B00CFDF23579E5F00C14F49 /* Secrets.swift in Sources */,
 				6B00CFD7235775E200C14F49 /* PhotoStruct.swift in Sources */,
