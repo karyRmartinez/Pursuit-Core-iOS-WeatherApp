@@ -9,7 +9,7 @@
 import Foundation
 
 struct Secrets {
-    static let APIKey = "13797159-8c9316d9a7c212a7922ef5ba3"
+    static let ImgesAPIKey = "13797159-8c9316d9a7c212a7922ef5ba3"
     static let darkApikey = "f7ccd9076b709bd3b3da0992466811b7"
     
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController, UITextFieldDelegate {
+class FirstViewController: UIViewController {
         
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -124,3 +124,21 @@ extension FirstViewController: UICollectionViewDelegateFlowLayout {
     }
 
     }
+
+extension FirstViewController: UITextFieldDelegate {
+//    textField.resignFirstResponder()
+//    return true
+}
+
+func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    guard CharacterSet(charactersIn: "0123456789").isSuperset(of: CharacterSet(charactersIn: string)) else {
+        return false
+    }
+    if range.location == 0 && (string == " ") { return false }
+    
+    let currentText = textField.text ?? ""
+    guard let stringRange = Range(range, in: currentText) else { return false }
+    let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+    return updatedText.count <= 5
+}
+

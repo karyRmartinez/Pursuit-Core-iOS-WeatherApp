@@ -24,6 +24,8 @@
 		6B00CFE92357BF1400C14F49 /* weatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B00CFE82357BF1400C14F49 /* weatherCollectionViewCell.swift */; };
 		6B00D01F235932C100C14F49 /* imageHelpere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B00D01E235932C100C14F49 /* imageHelpere.swift */; };
 		6B00D055235DEC8E00C14F49 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B00D054235DEC8E00C14F49 /* PhotosViewController.swift */; };
+		6B0169DA2360DBD300F927AD /* PhotosAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0169D92360DBD300F927AD /* PhotosAPIClient.swift */; };
+		6B0169DC2360E1EB00F927AD /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0169DB2360E1EB00F927AD /* DetailedViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		6B00CFE82357BF1400C14F49 /* weatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weatherCollectionViewCell.swift; sourceTree = "<group>"; };
 		6B00D01E235932C100C14F49 /* imageHelpere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageHelpere.swift; sourceTree = "<group>"; };
 		6B00D054235DEC8E00C14F49 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
+		6B0169D92360DBD300F927AD /* PhotosAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosAPIClient.swift; sourceTree = "<group>"; };
+		6B0169DB2360E1EB00F927AD /* DetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,9 +98,9 @@
 			isa = PBXGroup;
 			children = (
 				6B00CFDA23577C5D00C14F49 /* FirstViewController.swift */,
-				6B00D01E235932C100C14F49 /* imageHelpere.swift */,
-				6B00CFE82357BF1400C14F49 /* weatherCollectionViewCell.swift */,
 				6B00D054235DEC8E00C14F49 /* PhotosViewController.swift */,
+				6B0169DB2360E1EB00F927AD /* DetailedViewController.swift */,
+				6B00CFE82357BF1400C14F49 /* weatherCollectionViewCell.swift */,
 				6B00CFCB2357721D00C14F49 /* persistence */,
 			);
 			path = Controllers;
@@ -116,7 +120,9 @@
 			isa = PBXGroup;
 			children = (
 				6B00CFD1235774FE00C14F49 /* NetworkHelper.swift */,
+				6B00D01E235932C100C14F49 /* imageHelpere.swift */,
 				6B00CFE02357A6C700C14F49 /* APIClient.swift */,
+				6B0169D92360DBD300F927AD /* PhotosAPIClient.swift */,
 				6B00CFD32357753800C14F49 /* AppError.swift */,
 				6B00CFD5235775B900C14F49 /* Models */,
 			);
@@ -208,7 +214,9 @@
 				6B00CFDF23579E5F00C14F49 /* Secrets.swift in Sources */,
 				6B00CFD7235775E200C14F49 /* PhotoStruct.swift in Sources */,
 				548CE066234D33E600B5177D /* ZipCodeHelper.swift in Sources */,
+				6B0169DA2360DBD300F927AD /* PhotosAPIClient.swift in Sources */,
 				548CE052234D33B500B5177D /* AppDelegate.swift in Sources */,
+				6B0169DC2360E1EB00F927AD /* DetailedViewController.swift in Sources */,
 				6B00CFD42357753800C14F49 /* AppError.swift in Sources */,
 				6B00CFDB23577C5D00C14F49 /* FirstViewController.swift in Sources */,
 				6B00CFD02357747900C14F49 /* persistanceFile.swift in Sources */,

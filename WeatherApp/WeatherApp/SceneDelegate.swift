@@ -17,6 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       guard let windowScene = (scene as? UIWindowScene) else { return }
       let firstVC = FirstViewController()
       let PhotosVC = PhotosViewController()
+       
       
       let navVC = UINavigationController(rootViewController: firstVC)
       let tabController = UITabBarController()
