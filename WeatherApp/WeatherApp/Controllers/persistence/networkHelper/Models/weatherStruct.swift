@@ -27,6 +27,6 @@ struct DailyDatum: Codable {
     let time: Int
     let sunriseTime: Int
     let sunsetTime: Int
-    
+    let image: Data?
     
 }

@@ -11,19 +11,19 @@ import Foundation
 struct PhotosAPIClient {
     static let manager = PhotosAPIClient()
     
-    func getWeather(completionHandler: @escaping (Result<[DailyDatum], AppError>) -> ()) {
+    func getPhoto(completionHandler: @escaping (Result<[Hit], AppError>) -> ()) {
         NetworkHelper.manager.performDataTask(withUrl: pixalBayUrl, andMethod: .get) { (result) in
             switch result {
             case .failure(let error) :
                 completionHandler(.failure(error))
             case .success(let data):
                 do {
-                    let WeatherInfo = try JSONDecoder().decode(Weather.self, from: data)
-                    completionHandler(.success(WeatherInfo.daily.data))
+                    let PhotoInfo = try JSONDecoder().decode(Photo.self, from: data)
+                    completionHandler(.success(PhotoInfo.hits))
                 } catch {
                     completionHandler(.failure(.couldNotParseJSON(rawError: error)))
                     
-
+                    
                 }
             }
         }
